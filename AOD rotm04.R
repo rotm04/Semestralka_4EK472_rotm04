@@ -319,3 +319,306 @@ cat(
   "\nHotovo. Výsledky byly uloženy do souboru:",
   "praha_mestske_linky_vysledky_3_metody.csv\n"
 )
+
+
+# ============================================================
+# SOUHRNNÁ KONTROLA VÝSLEDKŮ DEA, SFA A TOPSIS
+# ============================================================
+
+metody <- c(
+  "eff_DEA_CCR",
+  "eff_DEA_BCC",
+  "eff_rozsah_SE",
+  "eff_SFA",
+  "score_TOPSIS"
+)
+
+# 1. Základní statistiky
+summary_stats <- data.frame(
+  metoda = metody,
+  prumer = sapply(df[metody], mean, na.rm = TRUE),
+  minimum = sapply(df[metody], min, na.rm = TRUE),
+  maximum = sapply(df[metody], max, na.rm = TRUE),
+  smerodatna_odchylka = sapply(df[metody], sd, na.rm = TRUE)
+)
+
+print(summary_stats)
+
+# 2. Efektivní jednotky DEA
+cat("\nEfektivní linky CCR:\n")
+print(df$route_num[abs(df$eff_DEA_CCR - 1) < 1e-6])
+
+cat("\nEfektivní linky BCC:\n")
+print(df$route_num[abs(df$eff_DEA_BCC - 1) < 1e-6])
+
+# 3. Kontrola měřítkové efektivnosti
+df$SE_kontrola <- df$eff_DEA_CCR / df$eff_DEA_BCC
+
+cat("\nMaximální rozdíl ve výpočtu SE:\n")
+print(max(abs(df$eff_rozsah_SE - df$SE_kontrola)))
+
+# 4. Spearmanova korelace
+korelacni_matice <- cor(
+  df[metody],
+  method = "spearman",
+  use = "complete.obs"
+)
+
+print(round(korelacni_matice, 3))
+
+# 5. Pořadí linek podle jednotlivých metod
+for (metoda in metody) {
+  cat("\nPořadí podle:", metoda, "\n")
+  
+  vysledek <- df[
+    order(df[[metoda]], decreasing = TRUE),
+    c("route_num", metoda)
+  ]
+  
+  print(vysledek, row.names = FALSE)
+}
+
+# 6. Kontrola vstupních kritérií TOPSIS
+topsis_kriteria <- c(
+  "osobokm_na_vozokm",
+  "cestujici_na_spoj",
+  "podil_nevyhovujicich_spoju_pct"
+)
+
+cat("\nKorelace kritérií TOPSIS:\n")
+print(round(
+  cor(df[topsis_kriteria], method = "spearman"),
+  3
+))
+
+
+# Citlivostní analýza DEA -------------------------------------------------
+
+# ============================================================
+# CITLIVOSTNÍ ANALÝZA DEA – 28 VS. 34 LINEK
+# ============================================================
+
+# Všech 34 linek s kladnými vstupy a výstupy
+df_all34 <- df_raw %>%
+  filter(
+    input_vozokm_den > 0,
+    output_osobokm_den > 0
+  )
+
+# Funkce pro výpočet DEA CCR, BCC a měřítkové efektivnosti
+calculate_dea <- function(data) {
+  
+  X <- as.matrix(data[, "input_vozokm_den", drop = FALSE])
+  Y <- as.matrix(data[, "output_osobokm_den", drop = FALSE])
+  
+  rownames(X) <- paste0("Linka_", data$route_num)
+  rownames(Y) <- paste0("Linka_", data$route_num)
+  
+  model_ccr <- Benchmarking::dea(
+    X = X,
+    Y = Y,
+    RTS = "crs",
+    ORIENTATION = "in"
+  )
+  
+  model_bcc <- Benchmarking::dea(
+    X = X,
+    Y = Y,
+    RTS = "vrs",
+    ORIENTATION = "in"
+  )
+  
+  ccr <- as.numeric(Benchmarking::eff(model_ccr))
+  bcc <- as.numeric(Benchmarking::eff(model_bcc))
+  
+  data.frame(
+    route_num = data$route_num,
+    CCR = ccr,
+    BCC = bcc,
+    SE = ccr / bcc
+  )
+}
+
+# Výpočet pro původních 28 linek
+dea_28 <- calculate_dea(df)
+
+# Výpočet pro všech 34 linek
+dea_34 <- calculate_dea(df_all34)
+
+# Porovnání původních 28 linek
+dea_comparison <- merge(
+  dea_28,
+  dea_34,
+  by = "route_num",
+  suffixes = c("_28", "_34")
+)
+
+# Rozdíly efektivnosti
+dea_comparison$rozdil_CCR <-
+  dea_comparison$CCR_34 - dea_comparison$CCR_28
+
+dea_comparison$rozdil_BCC <-
+  dea_comparison$BCC_34 - dea_comparison$BCC_28
+
+dea_comparison$rozdil_SE <-
+  dea_comparison$SE_34 - dea_comparison$SE_28
+
+# Výpis výsledků
+dea_comparison <- dea_comparison[
+  order(dea_comparison$route_num),
+]
+
+print(dea_comparison)
+
+# Souhrn změn
+cat("\nPrůměrná absolutní změna CCR:\n")
+print(mean(abs(dea_comparison$rozdil_CCR)))
+
+cat("\nPrůměrná absolutní změna BCC:\n")
+print(mean(abs(dea_comparison$rozdil_BCC)))
+
+cat("\nPrůměrná absolutní změna měřítkové efektivnosti:\n")
+print(mean(abs(dea_comparison$rozdil_SE)))
+
+# Korelace pořadí mezi oběma variantami DEA
+cat("\nSpearmanova korelace CCR:\n")
+print(cor(
+  dea_comparison$CCR_28,
+  dea_comparison$CCR_34,
+  method = "spearman"
+))
+
+cat("\nSpearmanova korelace BCC:\n")
+print(cor(
+  dea_comparison$BCC_28,
+  dea_comparison$BCC_34,
+  method = "spearman"
+))
+
+# Efektivní linky při zahrnutí všech 34 linek
+cat("\nEfektivní linky CCR – 34 linek:\n")
+print(dea_34$route_num[abs(dea_34$CCR - 1) < 1e-6])
+
+cat("\nEfektivní linky BCC – 34 linek:\n")
+print(dea_34$route_num[abs(dea_34$BCC - 1) < 1e-6])
+
+# ============================================================
+# CITLIVOSTNÍ ANALÝZA TOPSIS – ZMĚNA VAH
+# ============================================================
+
+# Kritéria
+criteria <- c(
+  "osobokm_na_vozokm",
+  "cestujici_na_spoj",
+  "podil_nevyhovujicich_spoju_pct"
+)
+
+# Směr kritérií
+impacts <- c("+", "+", "-")
+
+# Funkce pro výpočet standardního TOPSIS
+calculate_topsis <- function(data, criteria, weights, impacts) {
+  
+  M <- as.matrix(data[, criteria, drop = FALSE])
+  
+  # Kontrola dat
+  if (any(!is.finite(M))) {
+    stop("TOPSIS obsahuje chybějící nebo neplatné hodnoty.")
+  }
+  
+  if (any(weights < 0) || sum(weights) <= 0) {
+    stop("Váhy musí být nezáporné a jejich součet musí být kladný.")
+  }
+  
+  # Normalizace vah
+  weights <- weights / sum(weights)
+  
+  # Vektorová normalizace
+  norms <- sqrt(colSums(M^2))
+  
+  if (any(norms == 0)) {
+    stop("Některé kritérium má nulovou normu.")
+  }
+  
+  R <- sweep(M, 2, norms, "/")
+  
+  # Vážená normalizovaná matice
+  V <- sweep(R, 2, weights, "*")
+  
+  # Ideální a bazální řešení
+  ideal_best <- sapply(seq_along(impacts), function(j) {
+    if (impacts[j] == "+") {
+      max(V[, j])
+    } else {
+      min(V[, j])
+    }
+  })
+  
+  ideal_worst <- sapply(seq_along(impacts), function(j) {
+    if (impacts[j] == "+") {
+      min(V[, j])
+    } else {
+      max(V[, j])
+    }
+  })
+  
+  # Vzdálenosti od ideálního a bazálního řešení
+  d_best <- sqrt(rowSums(
+    sweep(V, 2, ideal_best, "-")^2
+  ))
+  
+  d_worst <- sqrt(rowSums(
+    sweep(V, 2, ideal_worst, "-")^2
+  ))
+  
+  # Výsledné TOPSIS skóre
+  score <- d_worst / (d_best + d_worst)
+  
+  data.frame(
+    route_num = data$route_num,
+    score = score
+  )
+}
+
+# Definice variant vah
+weight_scenarios <- list(
+  rovnomerne = c(1/3, 1/3, 1/3),
+  osobokm = c(0.50, 0.25, 0.25),
+  cestujici = c(0.25, 0.50, 0.25),
+  kvalita = c(0.25, 0.25, 0.50),
+  bez_osobokm = c(NA, 0.50, 0.50),
+  bez_cestujicich = c(0.50, NA, 0.50)
+)
+
+# Výpočet všech variant
+topsis_results <- lapply(
+  names(weight_scenarios),
+  function(scenario) {
+    
+    weights <- weight_scenarios[[scenario]]
+    active <- !is.na(weights)
+    
+    result <- calculate_topsis(
+      data = df,
+      criteria = criteria[active],
+      weights = weights[active],
+      impacts = impacts[active]
+    )
+    
+    names(result)[2] <- scenario
+    result
+  }
+)
+
+# Spojení výsledků do jedné tabulky
+topsis_comparison <- Reduce(
+  function(x, y) merge(x, y, by = "route_num"),
+  topsis_results
+)
+
+# Seřazení podle původní rovnoměrné varianty
+topsis_comparison <- topsis_comparison[
+  order(-topsis_comparison$rovnomerne),
+]
+
+print(topsis_comparison)
