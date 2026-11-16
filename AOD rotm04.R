@@ -62,4 +62,4 @@ print(cor(df[, c("eff_DEA_CCR", "eff_DEA_BCC", "eff_SFA", "score_TOPSIS")], meth
 print(kruskal.test(eff_DEA_CCR ~ typ_linky, data = df))
 
 # Uložení kompletních výsledků pro tabulky do semestrální práce
-write.csv(df, "praha_autobusy_vysledky_3_metody.csv", row.names = FALSE, fileEncoding = "UTF-8", dec = ",")
+write.csv2(df, "praha_autobusy_vysledky_3_metody.csv", row.names = FALSE, fileEncoding = "UTF-8")
