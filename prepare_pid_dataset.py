@@ -1,330 +1,274 @@
-from bs4 import BeautifulSoup # Funkce pro analýzu URL adres
-import io # Práce v RAM paměti bez nutnosti ukládání dočasných dat na HDD
-import numpy as np # Práce s číselnými daty
-import pandas as pd # Práce s datasety
-import pdfplumber # Extrakce textu z PDF souborů
-import re # Práce s regulárními výrazy v textu
-import requests # Stahování dat z internetu
-from urllib.parse import urljoin # Funkce pro spojování kusů URL adres
-import zipfile # Práce se zazipovanými soubory
 
-REFERENCE_DATE = "2026-11-11" # Referenční pracovní den pro analýzu
+import re
+import io
+import requests
+import pdfplumber
+import pandas as pd
 
-GTFS_URL = "https://data.pid.cz/PID_GTFS.zip"
-SURVEYS_URL = "https://pid.cz/o-systemu/dopravni-pruzkumy/"
-OUTPUT_CSV = "praha_autobusy_dea_dataset.csv"
+# ------------------------------------------------------------
+# NASTAVENÍ
+# ------------------------------------------------------------
+
+PDF_URL = "https://data.pid.cz/pruzkumy/2019_BUS19VY-SBORNIK.pdf"
+OUTPUT_CSV = "praha_mestske_linky_2019_pruzkum.csv"
+
+# Fyzické stránky PDF (číslování od 1).
+# Sestava 9 pro městské linky je na stranách 14–16.
+PDF_PAGES = [14, 15, 16]
+
+MIN_ROUTE = 100
+MAX_ROUTE = 299
+
+# Linky s menším počtem spojů ponecháme v CSV,
+# ale nebudou zařazeny do hlavního modelu.
+MIN_TRIPS_MAIN_MODEL = 10
 
 
-def time_to_seconds(t_str): # Sjednocení časových jednotek
-    """Převede GTFS čas (včetně hodnot > 24:00:00 pro noční přechody) na sekundy."""
-    if pd.isna(t_str):
-        return np.nan
-    parts = str(t_str).strip().split(":")
-    if len(parts) != 3:
-        return np.nan
-    return int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
+# ------------------------------------------------------------
+# POMOCNÉ FUNKCE
+# ------------------------------------------------------------
 
-def get_active_services(calendar, calendar_dates, reference_date):
-    """
-    Vrátí service_id, které jsou aktivní v konkrétní datum.
-    Zohledňuje běžný kalendář i výjimky calendar_dates.txt.
-    """
+def czech_number(value):
+    """Převede desetinné číslo s desetinnou čárkou na float."""
+    return float(value.replace(",", "."))
 
-    date = pd.Timestamp(reference_date)
-    date_str = date.strftime("%Y%m%d")
 
-    weekday_column = date.day_name().lower()
-
-    active_services = set()
-
-    # 1. Běžná pravidla z calendar.txt
-    if not calendar.empty:
-
-        start_dates = pd.to_datetime(
-            calendar["start_date"].astype(str),
-            format="%Y%m%d"
-        )
-
-        end_dates = pd.to_datetime(
-            calendar["end_date"].astype(str),
-            format="%Y%m%d"
-        )
-
-        mask = (
-            (calendar[weekday_column] == 1)
-            & (start_dates <= date)
-            & (end_dates >= date)
-        )
-
-        active_services = set(
-            calendar.loc[mask, "service_id"].astype(str)
-        )
-
-    # 2. Výjimky z calendar_dates.txt
-    if not calendar_dates.empty:
-
-        exceptions = calendar_dates[
-            calendar_dates["date"].astype(str).str.zfill(8)
-            == date_str
-        ]
-
-        for _, row in exceptions.iterrows():
-
-            service_id = str(row["service_id"])
-            exception_type = int(row["exception_type"])
-
-            if exception_type == 1:
-                # Služba je pro daný den mimořádně přidána.
-                active_services.add(service_id)
-
-            elif exception_type == 2:
-                # Služba je pro daný den mimořádně odebrána.
-                active_services.discard(service_id)
-
-    return active_services
-
-def extract_gtfs_inputs(): # Stáhne data o JŘ s pojistkou proti čekání při nefunkčnosti volaných serverů
-    print("[1/3] Stahuji GTFS jízdní řády ze serveru data.pid.cz (cca 50-80 MB)...")
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-    r = requests.get(GTFS_URL, headers=headers, timeout=120)
-    r.raise_for_status()
-    """Ze stažených dat načte údaje o existujících linkách, provozu v jednotlivých dnech, vypravovaných spojích a časech na zastávkách"""
-    with zipfile.ZipFile(io.BytesIO(r.content)) as z:
-
-    print("      Načítám tabulky GTFS...")
-
-    routes = pd.read_csv(
-        z.open("routes.txt"),
-        low_memory=False
+def download_pdf(url):
+    """Stáhne PDF a vrátí obsah v paměti."""
+    response = requests.get(
+        url,
+        headers={"User-Agent": "Mozilla/5.0"},
+        timeout=180
     )
+    response.raise_for_status()
+    return io.BytesIO(response.content)
 
-    calendar = pd.read_csv(
-        z.open("calendar.txt"),
-        low_memory=False,
-        dtype={"service_id": str}
-    )
 
-    trips = pd.read_csv(
-        z.open("trips.txt"),
-        low_memory=False,
-        dtype={"service_id": str}
-    )
+# Řádek souhrnu linky:
+# linka, přepravené osoby, vozové km, statistické km,
+# osobokm, osobokm/vozokm, %OBS-ST5, %ST5,
+# počet spojů, nevyhovující spoje.
+#
+# Řádky TAM a ZPĚT se tímto vzorem nezachytí.
+ROW_PATTERN = re.compile(
+    r"^\s*"
+    r"(?P<route>\d{3})\s+"
+    r"(?P<passengers>\d+)\s+"
+    r"(?P<vehicle_km>[\d,]+)\s+"
+    r"(?P<statistical_km>[\d,]+)\s+"
+    r"(?P<passenger_km>[\d,]+)\s+"
+    r"(?P<passenger_km_per_vehicle_km>[\d,]+)\s+"
+    r"(?P<obs_st5>[\d,]+)\s+"
+    r"(?P<st5>[\d,]+)\s+"
+    r"(?P<trips>\d+)\s+"
+    r"(?P<unsuitable_trips>\d+)\s*$"
+)
 
-    stop_times = pd.read_csv(
-        z.open("stop_times.txt"),
-        usecols=[
-            "trip_id",
-            "arrival_time",
-            "departure_time",
-            "stop_id",
-            "stop_sequence",
-            "shape_dist_traveled",
-        ],
-        low_memory=False,
-    )
 
-    # Výjimky z běžného kalendáře – jsou-li v GTFS k dispozici.
-    if "calendar_dates.txt" in z.namelist():
-        calendar_dates = pd.read_csv(
-            z.open("calendar_dates.txt"),
-            low_memory=False,
-            dtype={"service_id": str}
-        )
-    else:
-        calendar_dates = pd.DataFrame(
-            columns=["service_id", "date", "exception_type"]
-        )
+# ------------------------------------------------------------
+# EXTRAKCE SESTAVY 9
+# ------------------------------------------------------------
 
-    # 1. Filtr na denní městské autobusové linky v Praze (route_type == 3, čísla 100 až 250)
-    routes["route_num"] = pd.to_numeric(routes["route_short_name"], errors="coerce") # Nečíselné linky jsou vyřazeny
-    bus_routes = routes[
-        (routes["route_type"] == 3) # Kontroluji pouze autobusy
-        & (routes["route_num"] >= 100) # Městské autobusy mají čísla od 100...
-        & (routes["route_num"] <= 299) # ... do 299
-    ].copy()
+def extract_survey_data(pdf_file):
+    records = []
 
-    # 2. Výběr spojů aktivních v konkrétní referenční den
-    active_services = get_active_services(
-        calendar,
-        calendar_dates,
-        REFERENCE_DATE
-    )
-    
-    print(
-        f"      Referenční datum: {REFERENCE_DATE}"
-    )
-    
-    print(
-        f"      Počet aktivních service_id: {len(active_services)}"
-    )
-    
-    # Výběr všech spojů, které v daný den skutečně platí.
-    bus_trips = trips[
-        trips["route_id"].isin(bus_routes["route_id"])
-        & trips["service_id"].astype(str).isin(active_services)
-    ].copy()
-    
-    print(
-        f"      Počet vybraných spojů: {len(bus_trips)}"
-    )
-    
-    if bus_trips.empty:
+    with pdfplumber.open(pdf_file) as pdf:
+
+        for page_number in PDF_PAGES:
+
+            page = pdf.pages[page_number - 1]
+            page_text = page.extract_text()
+
+            if not page_text:
+                print(f"VAROVÁNÍ: Strana {page_number} neobsahuje text.")
+                continue
+
+            for line in page_text.splitlines():
+
+                match = ROW_PATTERN.match(line)
+
+                if not match:
+                    continue
+
+                row = match.groupdict()
+
+                route_num = int(row["route"])
+
+                # Pouze městské linky 100–299.
+                if not MIN_ROUTE <= route_num <= MAX_ROUTE:
+                    continue
+
+                records.append({
+                    "route_num": route_num,
+                    "output_cestujici_pruzkum": int(
+                        row["passengers"]
+                    ),
+                    "input_vozokm_den": czech_number(
+                        row["vehicle_km"]
+                    ),
+                    "statisticke_km": czech_number(
+                        row["statistical_km"]
+                    ),
+                    "output_osobokm_den": czech_number(
+                        row["passenger_km"]
+                    ),
+                    "osobokm_na_vozokm_pdf": czech_number(
+                        row["passenger_km_per_vehicle_km"]
+                    ),
+                    "input_pocet_spoju_den": int(
+                        row["trips"]
+                    ),
+                    "nevyhovujici_spoje": int(
+                        row["unsuitable_trips"]
+                    ),
+                    "strana_pdf": page_number
+                })
+
+    df = pd.DataFrame(records)
+
+    if df.empty:
         raise ValueError(
-            "Pro zvolené datum nebyly nalezeny žádné spoje. "
-            "Zkontrolujte datum a platnost GTFS kalendáře."
+            "Nepodařilo se načíst žádné řádky. "
+            "Zkontrolujte PDF nebo formát extrahovaného textu."
         )
 
-    """ Počítá dobu jízdy každého spoje a výsledky vrací v hodinách """
-    print("      Počítám ujeté vozokilometry, vozohodiny a zastávky pro jednotlivé spoje...")
-    st = stop_times[stop_times["trip_id"].isin(bus_trips["trip_id"])].copy()
-    st["arr_sec"] = st["arrival_time"].apply(time_to_seconds)
-    st["dep_sec"] = st["departure_time"].apply(time_to_seconds)
+    # Jedna souhrnná hodnota na linku.
+    if df["route_num"].duplicated().any():
+        duplicates = df.loc[
+            df["route_num"].duplicated(keep=False),
+            "route_num"
+        ].tolist()
 
-    # Agregace na úroveň jednotlivého spoje (trip_id)
-    trip_stats = st.groupby("trip_id").agg(
-        start_sec=("dep_sec", "min"),
-        end_sec=("arr_sec", "max"),
-        dist_km=("shape_dist_traveled", "max"),
-        stops_in_trip=("stop_id", "nunique"),
-    ).reset_index()
-    
-    # Kontrola chybějících a nulových vzdáleností
-
-    print(
-        "Podíl spojů bez použitelné vzdálenosti:",
-        round(
-            (trip_stats["dist_km"].isna() |
-             (trip_stats["dist_km"] <= 0)).mean() * 100,
-            2
-        ),
-        "%"
-    )
-    
-    print(
-        "Počet spojů s neplatnou dobou jízdy:",
-        (
-            trip_stats["duration_hours"].isna()
-            | (trip_stats["duration_hours"] <= 0)
-        ).sum()
-    )
-
-    trip_stats["duration_hours"] = (trip_stats["end_sec"] - trip_stats["start_sec"]) / 3600.0
-
-    # Chybí-li u některého spoje informace o délce trasy, odhadne ji z průměrné rychlosti autobusů 23 km/h
-    missing_dist = trip_stats["dist_km"].isna() | (trip_stats["dist_km"] <= 0)
-    trip_stats.loc[missing_dist, "dist_km"] = trip_stats.loc[missing_dist, "duration_hours"] * 23.0
-
-    # Převod případných metrů na kilometry (v PID GTFS je shape_dist_traveled v km)
-    if trip_stats["dist_km"].median() > 500: # Pojistka pro metry – některá data mohou být v m, jiná v km
-        trip_stats["dist_km"] = trip_stats["dist_km"] / 1000.0
-
-    merged_trips = bus_trips.merge(trip_stats, on="trip_id", how="inner")
-
-    # Počet unikátních zastávek na celé lince
-    st_with_route = st.merge(bus_trips[["trip_id", "route_id"]], on="trip_id")
-    route_stops = (
-        st_with_route.groupby("route_id")["stop_id"]
-        .nunique()
-        .reset_index()
-        .rename(columns={"stop_id": "input_pocet_zastavek"})
-    )
-
-    # Agregace na úroveň linky (DMU)
-    route_agg = (
-        merged_trips.groupby("route_id")
-        .agg(
-            input_pocet_spoju_den=("trip_id", "count"), # Kolik spojů denně linku obslouží
-            input_vozokm_den=("dist_km", "sum"), # Kolik km všechny vozy na lince denně najedou (jak moc linka opotřebovává autobusy)
-            input_vozohodiny_den=("duration_hours", "sum"), # Kolik h všechny vozy na lince denně najedou (jak moc linka zaměstnává řidiče)
-            prumerna_delka_spoje_km=("dist_km", "mean"), # Průměrná délka spojů na linku vypravovaných
+        raise ValueError(
+            f"V datech jsou duplicitní linky: {duplicates}"
         )
-        .reset_index()
+
+    # Kontrola klíčových hodnot proti PDF.
+    # Pokud se změní PDF nebo způsob extrakce, skript se zastaví.
+    expected = {
+        101: (3998, 815.7, 9736.2),
+        109: (7425, 1767.0, 31930.6),
+        207: (13946, 1407.3, 26117.6),
+        223: (8541, 1855.3, 29879.5),
+        240: (5233, 1933.2, 33877.7)
+    }
+
+    for route, values in expected.items():
+
+        row = df.loc[df["route_num"] == route]
+
+        if row.empty:
+            raise ValueError(
+                f"Kontrolní linka {route} nebyla nalezena."
+            )
+
+        actual = (
+            int(row.iloc[0]["output_cestujici_pruzkum"]),
+            round(row.iloc[0]["input_vozokm_den"], 1),
+            round(row.iloc[0]["output_osobokm_den"], 1)
+        )
+
+        if actual != values:
+            raise ValueError(
+                f"Nesouhlasí kontrolní hodnoty linky {route}. "
+                f"Očekáváno {values}, načteno {actual}."
+            )
+
+    return df
+
+
+# ------------------------------------------------------------
+# VYTVOŘENÍ FINÁLNÍHO DATASETU
+# ------------------------------------------------------------
+
+def build_dataset():
+
+    print("Stahuji PDF průzkumu PID 2019...")
+    pdf_file = download_pdf(PDF_URL)
+
+    print("Načítám Sestavu 9 ze stran 14–16...")
+    df = extract_survey_data(pdf_file)
+
+    # Kategorizace podle číselné řady.
+    # Nejde automaticky o klasifikaci páteřní/obslužná.
+    df["linkova_rada"] = df["route_num"].apply(
+        lambda x: "100" if x < 200 else "200"
     )
 
-    df_inputs = (
-        bus_routes[["route_id", "route_short_name", "route_num", "route_long_name"]]
-        .merge(route_agg, on="route_id", how="inner")
-        .merge(route_stops, on="route_id", how="left")
+    # Podíl nevyhovujících spojů v procentech.
+    df["podil_nevyhovujicich_spoju_pct"] = (
+        100 * df["nevyhovujici_spoje"]
+        / df["input_pocet_spoju_den"]
     )
 
-    # Odhad potřebného počtu vypravených vozů ve špičce (vozohodiny / 14 h provozu + 15% záloha)
-    df_inputs["input_odhad_vozu"] = np.ceil(df_inputs["input_vozohodiny_den"] / 14.0 * 1.15)
-    df_inputs["prumerna_rychlost_kmh"] = (
-        df_inputs["input_vozokm_den"] / df_inputs["input_vozohodiny_den"]
-    ) # Průměrná rychlost linky
+    # Produktivita – pouze doplňkový poměrový ukazatel.
+    df["osobokm_na_vozokm"] = (
+        df["output_osobokm_den"]
+        / df["input_vozokm_den"]
+    )
 
-    return df_inputs.sort_values("route_num").reset_index(drop=True)
+    df["cestujici_na_spoj"] = (
+        df["output_cestujici_pruzkum"]
+        / df["input_pocet_spoju_den"]
+    )
 
+    # Základní podmínky pro DEA.
+    df["v_hlavnim_modelu"] = (
+        (df["input_pocet_spoju_den"] >= MIN_TRIPS_MAIN_MODEL)
+        & (df["input_vozokm_den"] > 0)
+        & (df["output_osobokm_den"] > 0)
+    )
 
-def scrape_pid_pdf_surveys():
+    # Metadata o zdroji a období.
+    df["zdroj_dat"] = "PID_BUS19VY_Sestava_9"
+    df["rok_pruzkumu"] = 2019
+    df["obdobi_pruzkumu"] = "6:00–20:00"
+    df["den_pruzkumu"] = "streda"
 
+    df = df.sort_values("route_num").reset_index(drop=True)
+
+    # Uložení všech nalezených linek.
+    df.to_csv(
+        OUTPUT_CSV,
+        index=False,
+        encoding="utf-8-sig"
+    )
+
+    # --------------------------------------------------------
+    # KONTROLNÍ VÝPIS
+    # --------------------------------------------------------
+
+    print("\nDATASET ÚSPĚŠNĚ VYTVOŘEN")
+    print(f"Počet nalezených linek 100–299: {len(df)}")
     print(
-        "[2/3] PDF průzkumy zatím nejsou automaticky zpracovávány."
+        "Počet linek v hlavním modelu:",
+        int(df["v_hlavnim_modelu"].sum())
+    )
+    print(
+        "Počet linek mimo hlavní model:",
+        int((~df["v_hlavnim_modelu"]).sum())
     )
 
-    return pd.DataFrame(
-        columns=[
-            "route_num",
-            "output_cestujici_pruzkum",
-            "output_max_usek_cestujici",
-            "zdroj_vystupu",
-        ]
-    )
+    print("\nNačtené linky:")
+    print(df["route_num"].tolist())
 
-
-def build_final_dataset():
-    df = extract_gtfs_inputs()
-    df_pdf = scrape_pid_pdf_surveys()
-
-    print("[3/3] Spojuji vstupy (GTFS) a výstupy do finálního datasetu...")
-    if not df_pdf.empty: # Spojí pro každou linku data z předpisů, měření a průzkumů
-        df = df.merge(df_pdf, on="route_num", how="left")
-    else:
-        df["output_cestujici_pruzkum"] = np.nan
-        df["output_max_usek_cestujici"] = np.nan
-        df["zdroj_vystupu"] = None
-
-    # Neověřené hodnoty poptávky ponecháme jako chybějící. Nebudeme je nahrazovat náhodně generovanými odhady.
-    
-    df["zdroj_vystupu"] = df["zdroj_vystupu"].fillna(
-        "NEDOSTUPNY_UDAJ"
-    )
-
-    # Druhý klíčový výstup: Přepravní výkon v osobokilometrech (oskm) za pracovní den (průměrná délka cesty cestujícího v MHD Praha činí cca 42 % délky linky, min. 2.2 km)
-    # avg_trip_len = np.clip(df["prumerna_delka_spoje_km"] * 0.42, 2.2, 8.5)
-    # df["output_osobokm_den"] = np.round(df["output_cestujici_pruzkum"] * avg_trip_len, 1)
-
-    # Zaokrouhlení vstupů pro přehlednost
-    df["input_vozokm_den"] = df["input_vozokm_den"].round(1)
-    df["input_vozohodiny_den"] = df["input_vozohodiny_den"].round(2)
-    df["prumerna_delka_spoje_km"] = df["prumerna_delka_spoje_km"].round(2)
-    df["prumerna_rychlost_kmh"] = df["prumerna_rychlost_kmh"].round(2)
-
-    # Kategorizace pro testování hypotéz v R (páteřní vs. obslužná linka)
-    df["typ_linky"] = np.where(df["route_num"] < 200, "Paterni_100", "Obsluzna_200")
-
-    # Vyřazení extrémních okrajových záznamů (např. linky s méně než 10 spoji za den - školní/speciální)
-    df = df[df["input_pocet_spoju_den"] >= 10].reset_index(drop=True)
-
-    # Uložení do CSV
-    df.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
-    print(f"\nHOTOVO! Dataset byl uložen do souboru: {OUTPUT_CSV}")
-    print(f"Celkový počet produkčních jednotek (autobusových linek DMU): {len(df)}")
-    print("\nUkázka prvních 5 řádků:")
+    print("\nKontrola hlavních proměnných:")
     print(
         df[
             [
-                "route_short_name",
-                "typ_linky",
-                "input_vozokm_den",
-                "input_vozohodiny_den",
-                "input_pocet_zastavek",
+                "route_num",
                 "output_cestujici_pruzkum",
+                "input_vozokm_den",
                 "output_osobokm_den",
+                "input_pocet_spoju_den",
+                "nevyhovujici_spoje",
+                "v_hlavnim_modelu"
             ]
-        ].head()
+        ].to_string(index=False)
     )
+
+    print(f"\nSoubor uložen: {OUTPUT_CSV}")
 
 
 if __name__ == "__main__":
-    build_final_dataset()
+    build_dataset()
