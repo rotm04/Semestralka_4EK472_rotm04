@@ -1,0 +1,131 @@
+﻿route_id,route_short_name,route_num,route_long_name,input_pocet_spoju_den,input_vozokm_den,input_vozohodiny_den,prumerna_delka_spoje_km,input_pocet_zastavek,input_odhad_vozu,prumerna_rychlost_kmh,output_cestujici_pruzkum,output_max_usek_cestujici,zdroj_vystupu,output_osobokm_den,typ_linky
+L100,100,100.0,Zličín - Letiště / Terminál 1,23,246.4,6.67,10.71,14,1.0,36.96,30286.0,1141.0,PDF_pruzkum_PID,136282.0,Paterni_100
+L101,101,101.0,Viktoria Žižkov - Skalka - Zentiva,94,1016.4,53.33,10.81,62,5.0,19.06,45125.0,953.0,PDF_pruzkum_PID,204932.2,Paterni_100
+L102,102,102.0,Sídliště Bohnice - Kobylisy - Šimůnkova,210,1116.6,46.35,5.32,28,4.0,24.09,7715.0,3419.0,GTFS_modelovy_odhad,17228.4,Paterni_100
+L103,103,103.0,Ládví - Ďáblice - Březiněves,170,932.4,38.1,5.48,27,4.0,24.47,6973.0,2258.0,GTFS_modelovy_odhad,16062.7,Paterni_100
+L104,104,104.0,Klukovice - Na Hvězdárně,41,374.0,16.0,9.12,36,2.0,23.37,1524.0,665.0,GTFS_modelovy_odhad,5838.0,Paterni_100
+L105,105,105.0,Smíchovské nádraží - Filmové ateliéry Barrandov - Smíchovské nádraží,56,537.6,18.22,9.6,13,2.0,29.51,15128.0,5294.0,PDF_pruzkum_PID,61000.7,Paterni_100
+L106,106,106.0,Pražského povstání - Nádraží Braník,189,2299.5,114.17,12.17,55,10.0,20.14,182761761772772.0,1533.0,PDF_pruzkum_PID,933892692592537.4,Paterni_100
+L107,107,107.0,Dejvická - Suchdolské náměstí - Suchdol,412,2440.4,88.48,5.92,22,8.0,27.58,13586.0,5642.0,GTFS_modelovy_odhad,33799.4,Paterni_100
+L108,108,108.0,Dejvická - Divoká Šárka,72,998.7,51.58,13.87,67,5.0,19.36,5430.0,1764.0,GTFS_modelovy_odhad,31632.6,Paterni_100
+L109,109,109.0,Palmovka - Dolní Počernice - Výzkumné ústavy Běchovice,126,1374.6,52.08,10.91,37,5.0,26.39,45304.0,276.0,PDF_pruzkum_PID,207586.2,Paterni_100
+L110,110,110.0,Třeboradický hřbitov - Hloubětín,109,817.9,31.32,7.5,36,3.0,26.12,134915915827827.0,1742.0,PDF_pruzkum_PID,425175999710630.7,Paterni_100
+L111,111,111.0,Skalka - Dubeč - Koloděje,97,1059.9,39.88,10.93,46,4.0,26.58,45189.0,761.0,PDF_pruzkum_PID,207386.5,Paterni_100
+L112,112,112.0,Nádraží Holešovice - Zoo Praha-Troja,38,114.7,5.05,3.02,6,1.0,22.71,1136.0,347.0,GTFS_modelovy_odhad,2499.2,Paterni_100
+L113,113,113.0,Kačerov - Sídliště Písnice - Písnice - Točná,214,1516.2,67.78,7.09,38,6.0,22.37,749.0,357.0,PDF_pruzkum_PID,2228.8,Paterni_100
+L114,114,114.0,Zelený pruh - Šeberák,190,1714.7,84.93,9.02,42,7.0,20.19,12117.0,4426.0,GTFS_modelovy_odhad,45928.9,Paterni_100
+L115,115,115.0,Chodov - Městský archiv Chodovec - Chodov,108,556.1,25.15,5.15,10,3.0,22.11,30151.0,1131.0,PDF_pruzkum_PID,66332.2,Paterni_100
+L116,116,116.0,Dejvická - Bořislavka,38,342.3,13.17,9.01,32,2.0,25.99,1728.0,678.0,GTFS_modelovy_odhad,6536.8,Paterni_100
+L117,117,117.0,Poliklinika Budějovická - Nové Komořany,58,940.1,40.92,16.21,67,4.0,22.98,722.0,497.0,PDF_pruzkum_PID,4914.9,Paterni_100
+L118,118,118.0,Smíchovské nádraží - Depo Kačerov - Sídliště Spořilov,196,1719.8,82.4,8.77,40,7.0,20.87,596.0,495.0,PDF_pruzkum_PID,2196.4,Paterni_100
+L120,120,120.0,Na Knížecí - Pod Lochkovem / Nádraží Radotín,105,1509.7,61.78,14.38,63,6.0,24.43,15189.0,302.0,PDF_pruzkum_PID,91720.6,Paterni_100
+L121,121,121.0,Poliklinika Budějovická - Nádraží Braník,105,1081.8,47.22,10.3,43,4.0,22.91,15124.0,329.0,PDF_pruzkum_PID,65446.8,Paterni_100
+L122,122,122.0,Opatov - Újezd u Průhonic - Křeslice,47,184.8,8.17,3.93,21,1.0,22.63,1270.0,469.0,GTFS_modelovy_odhad,2794.0,Paterni_100
+L123,123,123.0,Na Knížecí - Šmukýřka,190,1051.0,50.33,5.53,25,5.0,20.88,8085.0,2857.0,GTFS_modelovy_odhad,18784.3,Paterni_100
+L124,124,124.0,Želivského - Smíchovské nádraží,198,2286.7,118.53,11.55,52,10.0,19.29,45381.0,376.0,PDF_pruzkum_PID,220127.2,Paterni_100
+L125,125,125.0,Smíchovské nádraží - Skalka,271,6280.7,207.78,23.18,61,18.0,30.23,30695.0,337.0,PDF_pruzkum_PID,260907.5,Paterni_100
+L126,126,126.0,Koleje Jižní Město - Nádraží Uhříněves,197,2815.1,115.07,14.29,46,10.0,24.46,8819.0,3464.0,GTFS_modelovy_odhad,52929.4,Paterni_100
+L128,128,128.0,Hlubočepy - Žvahov - Hlubočepy,39,90.2,5.2,2.31,9,1.0,17.34,1153.0,1152.0,PDF_pruzkum_PID,2536.6,Paterni_100
+L129,129,129.0,Smíchovské nádraží - Baně,98,1286.1,33.92,13.12,25,3.0,37.92,15225.0,337.0,PDF_pruzkum_PID,83916.9,Paterni_100
+L130,130,130.0,Zličín - Filmové ateliéry,52,504.7,20.83,9.71,50,2.0,24.22,517.0,501.0,PDF_pruzkum_PID,2107.4,Paterni_100
+L133,133,133.0,Florenc - Sídliště Malešice,238,1560.1,83.95,6.55,34,7.0,18.58,45282.0,789.0,PDF_pruzkum_PID,124663.3,Paterni_100
+L134,134,134.0,Podolská vodárna - Dvorce,183,1586.0,89.35,8.67,46,8.0,17.75,30334.0,597.0,PDF_pruzkum_PID,110417.3,Paterni_100
+L135,135,135.0,Florenc - Chodov,106,1307.7,69.92,12.34,24,6.0,18.7,490.0,301.0,PDF_pruzkum_PID,2538.8,Paterni_100
+L136,136,136.0,Sídliště Čakovice - Jižní Město,243,6238.9,297.18,25.67,91,25.0,20.99,30716.0,405.0,PDF_pruzkum_PID,261086.0,Paterni_100
+L138,138,138.0,Ústavy Akademie věd - Sídliště Spořilov - Skalka - Sídliště Skalka,190,2245.1,108.78,11.82,58,9.0,20.64,15375.0,257.0,PDF_pruzkum_PID,76304.0,Paterni_100
+L139,139,139.0,Želivského - Komořany - Sídliště Zbraslav,106,1766.4,83.28,16.66,38,7.0,21.21,546.0,488.0,PDF_pruzkum_PID,3821.3,Paterni_100
+L141,141,141.0,Bazén Hloubětín - Ve Žlíbku,113,1236.8,52.1,10.94,39,5.0,23.74,1129.0,394.0,PDF_pruzkum_PID,5189.8,Paterni_100
+L142,142,142.0,Nové Butovice - Velká Ohrada,170,626.1,26.37,3.68,17,3.0,23.75,4741.0,1868.0,GTFS_modelovy_odhad,10430.2,Paterni_100
+L143,143,143.0,Dejvická - Stadion Strahov,202,780.1,40.18,3.86,16,4.0,19.41,5667.0,2220.0,GTFS_modelovy_odhad,12467.4,Paterni_100
+L144,144,144.0,Kobylisy - Poliklinika Mazurská,107,348.2,12.48,3.25,6,2.0,27.89,2425.0,888.0,GTFS_modelovy_odhad,5335.0,Paterni_100
+L145,145,145.0,Dejvická - Sídliště Čimice,201,2536.9,95.57,12.62,32,8.0,26.55,11154.0,4745.0,GTFS_modelovy_odhad,59127.7,Paterni_100
+L146,146,146.0,Želivského - Vinice Hrdlořezy,143,643.9,27.33,4.5,24,3.0,23.56,4260.0,694.0,PDF_pruzkum_PID,9372.0,Paterni_100
+L147,147,147.0,Dejvická - Výhledy,144,949.9,35.6,6.6,25,3.0,26.68,7686.0,2629.0,GTFS_modelovy_odhad,21294.0,Paterni_100
+L148,148,148.0,I.P.Pavlova - Karlovo Náměstí - I.P.Pavlova,62,245.4,16.53,3.96,13,2.0,14.84,30124.0,955.0,PDF_pruzkum_PID,66272.8,Paterni_100
+L149,149,149.0,Dejvická - Stodůlky-Bavorská,106,1687.8,73.98,15.92,64,7.0,22.81,8796.0,3518.0,GTFS_modelovy_odhad,58822.1,Paterni_100
+L150,150,150.0,Želivského - Na Beránku,197,2688.6,126.2,13.65,55,11.0,21.3,30563.0,488.0,PDF_pruzkum_PID,175189.6,Paterni_100
+L151,151,151.0,Českomoravská - Poliklinika Prosek - Novoborská,102,847.3,42.47,8.31,38,4.0,19.95,5753.0,1782.0,GTFS_modelovy_odhad,20072.7,Paterni_100
+L152,152,152.0,Českomoravská - Sídliště Čimice,190,2070.0,87.7,10.89,37,8.0,23.6,8711.0,2847.0,GTFS_modelovy_odhad,39860.2,Paterni_100
+L153,153,153.0,U Zvonu - Nad Konvářkou - U Zvonu,15,134.5,8.72,8.97,26,1.0,15.43,665.0,206.0,GTFS_modelovy_odhad,2504.4,Paterni_100
+L154,154,154.0,Strašnická - Sídliště Libuš,117,2667.4,115.1,22.8,93,10.0,23.17,1131.0,395.0,PDF_pruzkum_PID,9613.5,Paterni_100
+L155,155,155.0,Nemocnice Vinohrady - Poliklinika Malešice,67,487.7,24.2,7.28,31,2.0,20.15,30171.0,575.0,PDF_pruzkum_PID,92242.7,Paterni_100
+L156,156,156.0,Nádraží Holešovice - OC Stromovka - Nádraží Holešovice,34,382.4,22.52,11.25,28,2.0,16.98,2131.0,935.0,GTFS_modelovy_odhad,10066.1,Paterni_100
+L157,157,157.0,Kačerov - Násirovo náměstí,110,733.6,32.03,6.67,22,3.0,22.9,15336.0,329.0,PDF_pruzkum_PID,42957.3,Paterni_100
+L158,158,158.0,Letňany - Sídliště Letňany  ,180,701.9,31.07,3.9,19,3.0,22.59,7394.0,2225.0,GTFS_modelovy_odhad,16266.8,Paterni_100
+L159,159,159.0,Letňany - Vinoř,135,1238.4,45.18,9.17,35,4.0,27.41,4711.0,2075.0,GTFS_modelovy_odhad,18149.9,Paterni_100
+L160,160,160.0,Dejvická - Lysolaje - Výhledy,47,430.6,18.8,9.16,42,2.0,22.91,1756.0,587.0,GTFS_modelovy_odhad,6757.5,Paterni_100
+L161,161,161.0,Bořislavka - Nebušice - Přední Kopanina / K Tuchoměřicům - Letiště / Terminál 1,99,595.8,20.28,6.02,28,2.0,29.37,3197.0,1209.0,GTFS_modelovy_odhad,8080.6,Paterni_100
+L162,162,162.0,Kobylisy - Dolní Chabry,92,398.2,16.83,4.33,22,2.0,23.66,2521.0,915.0,GTFS_modelovy_odhad,5546.2,Paterni_100
+L163,163,163.0,Depo Hostivař - Sídliště Rohožník,110,1554.2,57.78,14.13,46,5.0,26.9,404.0,389.0,PDF_pruzkum_PID,2397.4,Paterni_100
+L164,164,164.0,Sídliště Řepy - Bílá Hora - Malovanka,85,925.5,46.13,10.89,49,4.0,20.06,3807.0,1198.0,GTFS_modelovy_odhad,17409.7,Paterni_100
+L166,166,166.0,Sídliště Čakovice - Střížkov - Domov seniorů Ďáblice,71,1579.0,75.83,22.24,97,7.0,20.82,6822.0,2132.0,GTFS_modelovy_odhad,57987.0,Paterni_100
+L167,167,167.0,Na Knížecí - Nemocnice na Homolce,202,1522.7,68.33,7.54,26,6.0,22.28,7153.0,2442.0,GTFS_modelovy_odhad,22646.4,Paterni_100
+L168,168,168.0,Nové Butovice - Nemocnice Na Homolce - Bílá Hora,77,1166.1,52.78,15.14,56,5.0,22.09,4903.0,2027.0,GTFS_modelovy_odhad,31186.3,Paterni_100
+L169,169,169.0,Kobylisy - Sídliště Čimice,94,397.5,16.45,4.23,21,2.0,24.17,3569.0,1265.0,GTFS_modelovy_odhad,7851.8,Paterni_100
+L170,170,170.0,Pražská čtvrť - Jižní Město,102,2025.6,89.57,19.86,39,8.0,22.62,45444.0,296.0,PDF_pruzkum_PID,379036.4,Paterni_100
+L171,171,171.0,Depo Hostivař - Ve Žlíbku,118,1662.1,67.68,14.09,48,6.0,24.56,5334.0,1597.0,GTFS_modelovy_odhad,31554.8,Paterni_100
+L172,172,172.0,Smíchovské nádraží - Velká Chuchle - Na Hvězdárně,55,583.6,17.72,10.61,22,2.0,32.94,1183.0,355.0,PDF_pruzkum_PID,5272.4,Paterni_100
+L173,173,173.0,Depo Hostivař - Kardausova,56,391.8,16.13,7.0,11,2.0,24.28,2437.0,951.0,GTFS_modelovy_odhad,7160.5,Paterni_100
+L174,174,174.0,Kukulova - Luka -  Řeporyjské náměstí - Třebonice,214,1916.6,79.68,8.96,41,7.0,24.05,7727.0,2632.0,GTFS_modelovy_odhad,29065.8,Paterni_100
+L175,175,175.0,Florenc - Háje,116,1985.2,97.97,17.11,75,9.0,20.26,45158.0,1224.0,PDF_pruzkum_PID,324590.2,Paterni_100
+L177,177,177.0,Chodov - Skalka - Poliklinika Mazurská,197,5247.7,233.9,26.64,92,20.0,22.44,19132.0,6484.0,GTFS_modelovy_odhad,162622.0,Paterni_100
+L180,180,180.0,Dejvická - Zličín - Obchodní centrum Zličín,112,1562.1,71.03,13.95,32,6.0,21.99,7078.0,2000.0,GTFS_modelovy_odhad,41460.7,Paterni_100
+L181,181,181.0,Černý Most - Opatov,113,1552.9,67.7,13.74,61,6.0,22.94,1197.0,418.0,PDF_pruzkum_PID,6908.8,Paterni_100
+L182,182,182.0,Kbelský hřbitov - Opatov,86,1479.7,62.12,17.21,80,6.0,23.82,603.0,442.0,PDF_pruzkum_PID,4357.6,Paterni_100
+L183,183,183.0,Vozovna Kobylisy - Háje,120,2682.6,106.23,22.36,73,9.0,25.25,627643.0,1270.0,PDF_pruzkum_PID,5334965.5,Paterni_100
+L184,184,184.0,Kukulova  - Velká Ohrada,176,1408.6,57.43,8.0,26,5.0,24.53,6969.0,2140.0,GTFS_modelovy_odhad,23425.4,Paterni_100
+L185,185,185.0,Letňany - Třeboradice,89,750.3,27.83,8.43,30,3.0,26.96,3695.0,1538.0,GTFS_modelovy_odhad,13083.3,Paterni_100
+L186,186,186.0,Černý Most - Nádraží Satalice - Vinoř,90,663.8,25.05,7.38,33,3.0,26.5,4495.0,1800.0,GTFS_modelovy_odhad,13923.4,Paterni_100
+L187,187,187.0,Nádraží Holešovice - Pelc-Tyrolka - Nádraží Holešovice,70,236.5,9.33,3.38,6,1.0,25.34,2047.0,597.0,GTFS_modelovy_odhad,4503.4,Paterni_100
+L188,188,188.0,Želivského - Kavčí hory,217,2806.9,136.22,12.93,58,12.0,20.61,30505.0,385.0,PDF_pruzkum_PID,165721.9,Paterni_100
+L189,189,189.0,Kačerov - Sídliště Lhotka,212,980.6,44.72,4.63,19,4.0,21.93,604.0,488.0,PDF_pruzkum_PID,1328.8,Paterni_100
+L190,190,190.0,Smíchovské nádraží - Na Beránku,191,1819.4,66.87,9.53,30,6.0,27.21,560.0,387.0,PDF_pruzkum_PID,2240.5,Paterni_100
+L191,191,191.0,Na Knížecí - Dědina - Obchodní centrum Ruzyně - Letiště,223,3657.2,158.72,16.4,67,14.0,23.04,14572.0,6092.0,GTFS_modelovy_odhad,100370.7,Paterni_100
+L194,194,194.0,Florenc - Nemocnice pod Petřínem,29,118.6,9.87,4.09,14,1.0,12.02,2959.0,2958.0,PDF_pruzkum_PID,6509.8,Paterni_100
+L195,195,195.0,Sídliště Letňany - Poliklinika Zahradní Město - Jesenická,201,3159.0,149.42,15.72,63,13.0,21.14,15083.0,5321.0,GTFS_modelovy_odhad,99560.8,Paterni_100
+L196,196,196.0,Smíchovské nádraží - Kačerov,188,1809.7,75.92,9.63,33,7.0,23.84,662.0,363.0,PDF_pruzkum_PID,2676.5,Paterni_100
+L197,197,197.0,Smíchovské nádraží - Sídliště Písnice - Roztyly,194,2916.4,115.88,15.03,59,10.0,25.17,15527.0,614.0,PDF_pruzkum_PID,98036.8,Paterni_100
+L199,199,199.0,Želivského - Sídliště Malešice,186,506.7,24.5,2.72,16,3.0,20.68,30357.0,575.0,PDF_pruzkum_PID,66785.4,Paterni_100
+L200,200,200.0,Kobylisy - Sídliště Bohnice,379,1489.0,60.07,3.93,16,5.0,24.79,4349.0,1578.0,GTFS_modelovy_odhad,9567.8,Obsluzna_200
+L201,201,201.0,Nádraží Holešovice - Černý Most,207,3258.0,143.72,15.74,84,12.0,22.67,9065.0,3747.0,GTFS_modelovy_odhad,59923.4,Obsluzna_200
+L202,202,202.0,Poliklinika Mazurská - Čakovice,97,1104.4,47.03,11.39,50,4.0,23.48,2179.0,737.0,GTFS_modelovy_odhad,10420.1,Obsluzna_200
+L203,203,203.0,Poliklinika Budějovická - Háje,61,1324.5,51.62,21.71,70,5.0,25.66,1116.0,972.0,PDF_pruzkum_PID,9486.0,Obsluzna_200
+L204,204,204.0,Stavební zóna Horní Počernice - Sídliště Petrovice,53,1369.2,52.6,25.83,74,5.0,26.03,2756.0,1030.0,GTFS_modelovy_odhad,23426.0,Obsluzna_200
+L206,206,206.0,Bazén Hloubětín - Dolní Počernice,104,754.2,31.85,7.25,30,3.0,23.68,3315.0,1164.0,GTFS_modelovy_odhad,10097.3,Obsluzna_200
+L207,207,207.0,Staroměstská - Ohrada,248,1327.7,84.47,5.35,28,7.0,15.72,30637.0,789.0,PDF_pruzkum_PID,68889.3,Obsluzna_200
+L208,208,208.0,Depo Hostivař - Obchodní centrum Štěrboholy - Vinice Dolní Počernice,73,678.1,26.88,9.29,39,3.0,25.22,404.0,358.0,PDF_pruzkum_PID,1576.2,Obsluzna_200
+L209,209,209.0,Letňany - Ve Žlíbku - Nádraží Uhříněves,62,1839.5,60.62,29.67,77,5.0,30.35,3788.0,1359.0,GTFS_modelovy_odhad,32198.0,Obsluzna_200
+L210,210,210.0,Nádraží Klánovice - Blatov sever,54,161.2,6.75,2.98,13,1.0,23.88,454.0,158.0,PDF_pruzkum_PID,998.8,Obsluzna_200
+L211,211,211.0,Nádraží Klánovice - Sídliště Rohožník,65,188.4,7.15,2.9,13,1.0,26.35,15138.0,454.0,PDF_pruzkum_PID,33303.6,Obsluzna_200
+L212,212,212.0,Nádraží Klánovice-sever - Nepasické náměstí,49,118.9,4.5,2.43,12,1.0,26.42,454.0,158.0,PDF_pruzkum_PID,998.8,Obsluzna_200
+L213,213,213.0,Želivského - Jižní Město,233,2447.4,111.17,10.5,38,10.0,22.02,916.0,413.0,PDF_pruzkum_PID,4041.0,Obsluzna_200
+L214,214,214.0,Sobín - Bílá Hora,17,120.6,5.0,7.09,14,1.0,24.11,322.0,108.0,GTFS_modelovy_odhad,959.0,Obsluzna_200
+L215,215,215.0,Kačerov - Sídliště Libuš,208,982.9,44.18,4.73,18,4.0,22.25,578.0,488.0,PDF_pruzkum_PID,1271.6,Obsluzna_200
+L216,216,216.0,Sídliště Baba - Poliklinika Petřiny,51,413.6,22.23,8.11,41,2.0,18.6,989.0,422.0,GTFS_modelovy_odhad,3368.5,Obsluzna_200
+L218,218,218.0,Na Pískách - Nové Vokovice,39,119.1,7.45,3.05,16,1.0,15.99,875.0,364.0,GTFS_modelovy_odhad,1925.0,Obsluzna_200
+L219,219,219.0,Jinonice - Malá Ohrada,60,577.3,27.03,9.62,39,3.0,21.36,1802.0,621.0,GTFS_modelovy_odhad,7282.6,Obsluzna_200
+L220,220,220.0,Černý Most - K Zelenči - Černý Most,53,960.0,26.38,18.11,12,3.0,36.39,15217.0,897.0,PDF_pruzkum_PID,115760.5,Obsluzna_200
+L221,221,221.0,Černý Most - Klánovice,98,983.7,34.12,10.04,46,3.0,28.83,986.0,438.0,PDF_pruzkum_PID,4156.9,Obsluzna_200
+L222,222,222.0,Černý Most - VÚ Běchovice,38,280.5,9.17,7.38,24,1.0,30.6,986.0,438.0,PDF_pruzkum_PID,3057.2,Obsluzna_200
+L223,223,223.0,Sídliště Černý Most - Černý Most - Sídliště Horní Počernice,212,1372.5,57.9,6.47,23,5.0,23.71,15249.0,897.0,PDF_pruzkum_PID,41464.6,Obsluzna_200
+L224,224,224.0,Dolnopočernický hřbitov - Ve Žlíbku,44,806.3,35.67,18.33,73,3.0,22.61,1129.0,897.0,PDF_pruzkum_PID,8689.6,Obsluzna_200
+L225,225,225.0,Velká Ohrada - Sídliště Na Dědině,183,1852.4,88.22,10.12,41,8.0,21.0,4358.0,1299.0,GTFS_modelovy_odhad,18528.1,Obsluzna_200
+L226,226,226.0,Háje - Lipany - Benice,63,828.0,31.42,13.14,36,3.0,26.36,30143.0,338.0,PDF_pruzkum_PID,166392.7,Obsluzna_200
+L227,227,227.0,Háje - Kolovraty - Nedvězí,63,841.5,33.45,13.36,44,3.0,25.16,435.0,402.0,PDF_pruzkum_PID,2440.2,Obsluzna_200
+L228,228,228.0,Poliklinika Malešice - Obchodní centrum Štěrboholy - Benice,63,913.7,36.2,14.5,59,3.0,25.24,9692.0,9691.0,PDF_pruzkum_PID,59039.0,Obsluzna_200
+L229,229,229.0,Depo Hostivař - Sídliště Uhříněves - Královice,59,761.4,27.9,12.91,42,3.0,27.29,741.0,389.0,PDF_pruzkum_PID,4016.5,Obsluzna_200
+L231,231,231.0,Na Knížecí - Dívčí hrady - Na Knížecí,40,208.6,10.63,5.22,11,1.0,19.62,15167.0,302.0,PDF_pruzkum_PID,33367.4,Obsluzna_200
+L234,234,234.0,Nádraží Holešovice - Podhoří,12,53.4,2.37,4.45,20,1.0,22.58,234704560.0,82146596.0,PDF_pruzkum_PID,516350032.0,Obsluzna_200
+L235,235,235.0,Nemocnice Bohnice - Podhoří,10,60.0,2.53,6.0,23,1.0,23.68,238.0,82.0,GTFS_modelovy_odhad,599.7,Obsluzna_200
+L236,236,236.0,Zámky - Podhoří,15,85.3,3.2,5.69,20,1.0,26.66,293.0,129.0,GTFS_modelovy_odhad,699.8,Obsluzna_200
+L240,240,240.0,Černý Most - Háje,111,2053.8,71.53,18.5,51,6.0,28.71,30231.0,286.0,PDF_pruzkum_PID,234927.5,Obsluzna_200
+L241,241,241.0,Smíchovské nádraží - Lipence,123,1698.0,48.05,13.8,31,4.0,35.34,45224.0,355.0,PDF_pruzkum_PID,262203.4,Obsluzna_200
+L242,242,242.0,Zbraslavské náměstí - Dolní Černošice,46,418.8,14.65,9.1,26,2.0,28.58,1499.0,566.0,GTFS_modelovy_odhad,5731.2,Obsluzna_200
+L243,243,243.0,Radotínská lávka - Lipence - Kazín,54,251.6,10.22,4.66,16,1.0,24.63,4288.0,1225.0,PDF_pruzkum_PID,9433.6,Obsluzna_200
+L244,244,244.0,Smíchovské nádraží - Sídliště Radotín,88,955.4,29.68,10.86,31,3.0,32.19,45186.0,600.0,PDF_pruzkum_PID,206044.7,Obsluzna_200
+L245,245,245.0,Nádraží Radotín - Lahovská,15,96.5,4.43,6.44,12,1.0,21.77,1274.0,1017.0,PDF_pruzkum_PID,3443.6,Obsluzna_200
+L246,246,246.0,Zličín - Obchodní centrum Sárská - Poliklinika Modřany,33,737.0,26.87,22.33,46,3.0,27.43,746.0,456.0,PDF_pruzkum_PID,6341.0,Obsluzna_200
+L247,247,247.0,Nádraží Radotín - Zbraslav,46,357.4,11.28,7.77,22,1.0,31.67,1701.0,699.0,GTFS_modelovy_odhad,5550.2,Obsluzna_200
+L248,248,248.0,Nádraží Radotín - Viničky - Nádraží Radotín,10,39.8,2.17,3.98,12,1.0,18.39,175.0,58.0,GTFS_modelovy_odhad,385.0,Obsluzna_200
+L249,249,249.0,Zličín - Nový Zličín,53,79.5,5.18,1.5,3,1.0,15.34,679.0,239.0,GTFS_modelovy_odhad,1493.8,Obsluzna_200
+L250,250,250.0,Černý Most - Sídliště Rohožník,62,743.9,22.87,12.0,11,2.0,32.53,45194.0,432.0,PDF_pruzkum_PID,227749.2,Obsluzna_200
