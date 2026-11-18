@@ -1,0 +1,140 @@
+﻿survey_id,check,value,expected,status,detail
+2017_North,pdf_available,LOCAL_FILE,LOCAL_FILE|DOWNLOADED,OK,
+2017_North,pages_used,"13,14,15,16,17,18,19",,INFO,zdroj: AUTO_DETECT
+2017_North,rows_city_vs_intro,28,28,OK,"zdroj: PDF_intro: 28 městských, 20 příměstských, 25 regionálních"
+2017_North,rows_all_classes_vs_intro,73,73,OK,součet městských + příměstských + regionálních linek podle úvodu
+2017_North,rows_by_class,"{'mestska': 28, 'regionalni': 25, 'prijmestska': 20}",,INFO,třída podle čísla linky (viz classify)
+2017_North,sum_passengers_vs_intro_total,315415,315415,OK,celkový počet přepravených osob uvedený v úvodu zprávy
+2017_North,celkem_passengers,315415,315415,OK,součet 73 řádků vs. řádek CELKEM; tolerance 0
+2017_North,celkem_trips,5417,5417,OK,součet 73 řádků vs. řádek CELKEM; tolerance 0
+2017_North,celkem_unsuitable,131,131,OK,součet 73 řádků vs. řádek CELKEM; tolerance 0
+2017_North,celkem_vehicle_km,70160.4,70160.4,OK,součet 73 řádků vs. řádek CELKEM; tolerance 3.85
+2017_North,celkem_statistical_km,5840001.7,5840001.7,OK,součet 73 řádků vs. řádek CELKEM; tolerance 38.5
+2017_North,celkem_passenger_km,1448086.4,1448085.8,OK,součet 73 řádků vs. řádek CELKEM; tolerance 3.85
+2017_North,header_main_date,2017-04-05,1 datum,OK,
+2017_North,header_observation_window,6:00-20:00,1 okno,OK,
+2017_North,main_date_within_intro_range,2017-04-05,2017-04-04..2017-04-06,OK,
+2017_North,route_names_from_intro,28,28,OK,názvy tras z úvodního seznamu; chybějící: 
+2017_North,route_labels_city,102 103 110 112 136 140 144 145 151 152 156 158 162 166 169 177 182 183 185 195 200 201 202 236 269 551 557 575,,INFO,
+2017_North,route_labels_noncity_excluded,45,,INFO,302 305 346 348 349 351 367 368 369 370 371 372 373 374 375 376 377 378 379 396 406 407 413 416 417 418 419 420 457 458 464 466 467 468 470 471 472 473 474 475 476 477 478 479 496
+2017_North,duplicate_route_labels,0,0,OK,
+2017_North,unmatched_candidate_lines,0,0,OK,viz extraction_unmatched_lines.csv
+2017_North,missing_values_numeric,0,0,OK,
+2017_North,nonpositive_vozokm_or_osobokm,0,0,OK,tyto řádky mají analysis_ready = FALSE
+2017_North,ratio_pdf_vs_computed,0,0,OK,porovnání s ohledem na zaokrouhlení; podezřelé: 
+2017_North,unsuitable_gt_trips,0,0,OK,
+2017_North,low_service_count_rows,3,,INFO,"spoje < 10; pouze příznak, řádky NEJSOU vyřazeny"
+2017_North,school_routes,NA,,NOT_VERIFIED,NOT_STATED_IN_PDF_INTRO (551/557/575 pravděpodobně školní – NEOVĚŘENO)
+2017_North,control_102,"(7473, 1102.5, 19372.0)","(7473, 1102.5, 19372.0)",OK,
+2017_North,control_136,"(40635, 5083.5, 159989.6)","(40635, 5083.5, 159989.6)",OK,
+2017_North,control_575,"(181, 6.6, 383.6)","(181, 6.6, 383.6)",OK,
+2017_Northwest,pdf_available,LOCAL_FILE,LOCAL_FILE|DOWNLOADED,OK,
+2017_Northwest,pages_used,"11,12,13,14",,INFO,zdroj: AUTO_DETECT
+2017_Northwest,rows_city_vs_intro,25,25,OK,"zdroj: PDF_intro: 25 městských (vč. 3 školních), 14 příměstských"
+2017_Northwest,rows_all_classes_vs_intro,39,39,OK,součet městských + příměstských + regionálních linek podle úvodu
+2017_Northwest,rows_by_class,"{'mestska': 25, 'prijmestska': 14}",,INFO,třída podle čísla linky (viz classify)
+2017_Northwest,sum_passengers_vs_intro_total,207781,207781,OK,celkový počet přepravených osob uvedený v úvodu zprávy
+2017_Northwest,celkem_passengers,207781,207781,OK,součet 39 řádků vs. řádek CELKEM; tolerance 0
+2017_Northwest,celkem_trips,4389,4389,OK,součet 39 řádků vs. řádek CELKEM; tolerance 0
+2017_Northwest,celkem_unsuitable,130,130,OK,součet 39 řádků vs. řádek CELKEM; tolerance 0
+2017_Northwest,celkem_vehicle_km,38009.3,38009.1,OK,součet 39 řádků vs. řádek CELKEM; tolerance 2.15
+2017_Northwest,celkem_statistical_km,2924648.3,2924648.3,OK,součet 39 řádků vs. řádek CELKEM; tolerance 21.5
+2017_Northwest,celkem_passenger_km,749951.5,749951.4,OK,součet 39 řádků vs. řádek CELKEM; tolerance 2.15
+2017_Northwest,header_main_date,2017-10-11,1 datum,OK,
+2017_Northwest,header_observation_window,6:00-20:00,1 okno,OK,
+2017_Northwest,main_date_within_intro_range,2017-10-11,2017-10-10..2017-10-12,OK,
+2017_Northwest,route_names_from_intro,25,25,OK,názvy tras z úvodního seznamu; chybějící: 
+2017_Northwest,route_labels_city,107 108 116 123 131 137 142 143 147 149 160 161 164 167 168 174 176 180 184 191 192 225 255 260 265,,INFO,
+2017_Northwest,route_labels_noncity_excluded,14,,INFO,301 306 312 316 319 336 340 347 350 352 355 356 359 386
+2017_Northwest,duplicate_route_labels,0,0,OK,
+2017_Northwest,unmatched_candidate_lines,0,0,OK,viz extraction_unmatched_lines.csv
+2017_Northwest,missing_values_numeric,0,0,OK,
+2017_Northwest,nonpositive_vozokm_or_osobokm,0,0,OK,tyto řádky mají analysis_ready = FALSE
+2017_Northwest,ratio_pdf_vs_computed,0,0,OK,porovnání s ohledem na zaokrouhlení; podezřelé: 
+2017_Northwest,unsuitable_gt_trips,0,0,OK,
+2017_Northwest,low_service_count_rows,3,,INFO,"spoje < 10; pouze příznak, řádky NEJSOU vyřazeny"
+2017_Northwest,school_routes,255 260 265,,OK,PDF_intro: 3 školní linky; identita = 25x-26x (počet souhlasí) – inferováno; chybějící v datech: 
+2017_Northwest,control_107,"(22805, 2293.8, 93738.3)","(22805, 2293.8, 93738.3)",OK,
+2017_Northwest,control_255,"(55, 11.0, 231.0)","(55, 11.0, 231.0)",OK,
+2018_Southwest,pdf_available,LOCAL_FILE,LOCAL_FILE|DOWNLOADED,OK,
+2018_Southwest,pages_used,"12,13,14,15,16",,INFO,zdroj: AUTO_DETECT
+2018_Southwest,rows_city_vs_intro,24,24,OK,"zdroj: PDF_intro: 24 městských (vč. 5 školních), 34 příměstských"
+2018_Southwest,rows_all_classes_vs_intro,58,58,OK,součet městských + příměstských + regionálních linek podle úvodu
+2018_Southwest,rows_by_class,"{'mestska': 24, 'prijmestska': 20, 'regionalni': 14}",,INFO,třída podle čísla linky (viz classify)
+2018_Southwest,sum_passengers_vs_intro_total,143971,143971,OK,celkový počet přepravených osob uvedený v úvodu zprávy
+2018_Southwest,celkem_passengers,143971,143971,OK,součet 58 řádků vs. řádek CELKEM; tolerance 0
+2018_Southwest,celkem_trips,3012,3012,OK,součet 58 řádků vs. řádek CELKEM; tolerance 0
+2018_Southwest,celkem_unsuitable,67,67,OK,součet 58 řádků vs. řádek CELKEM; tolerance 0
+2018_Southwest,celkem_vehicle_km,43675.4,43675.4,OK,součet 58 řádků vs. řádek CELKEM; tolerance 3.1
+2018_Southwest,celkem_statistical_km,3536320.2,3536320.3,OK,součet 58 řádků vs. řádek CELKEM; tolerance 31.0
+2018_Southwest,celkem_passenger_km,972263.1,972262.9,OK,součet 58 řádků vs. řádek CELKEM; tolerance 3.1
+2018_Southwest,header_main_date,2018-04-18,1 datum,OK,
+2018_Southwest,header_observation_window,6:00-20:00,1 okno,OK,
+2018_Southwest,main_date_within_intro_range,2018-04-18,2018-04-17..2018-04-19,OK,
+2018_Southwest,route_names_from_intro,24,24,OK,názvy tras z úvodního seznamu; chybějící: 
+2018_Southwest,route_labels_city,100 105 118 120 125 128 129 130 165 170 172 190 230 231 241 243 244 245 246 258 261 266 269 271,,INFO,
+2018_Southwest,route_labels_noncity_excluded,34,,INFO,307 308 309 310 311 313 314 315 317 318 320 321 334 338 358 360 361 380 384 390 425 437 439 440 446 447 448 449 451 460 486 488 664 665
+2018_Southwest,duplicate_route_labels,0,0,OK,
+2018_Southwest,unmatched_candidate_lines,0,0,OK,viz extraction_unmatched_lines.csv
+2018_Southwest,missing_values_numeric,0,0,OK,
+2018_Southwest,nonpositive_vozokm_or_osobokm,0,0,OK,tyto řádky mají analysis_ready = FALSE
+2018_Southwest,ratio_pdf_vs_computed,0,0,OK,porovnání s ohledem na zaokrouhlení; podezřelé: 
+2018_Southwest,unsuitable_gt_trips,0,0,OK,
+2018_Southwest,low_service_count_rows,5,,INFO,"spoje < 10; pouze příznak, řádky NEJSOU vyřazeny"
+2018_Southwest,school_routes,258 261 266 269 271,,OK,PDF_intro: 5 školních linek; identita = 25x-27x (počet souhlasí) – inferováno; chybějící v datech: 
+2018_Southwest,control_100,"(3454, 1197.6, 29024.6)","(3454, 1197.6, 29024.6)",OK,
+2018_Southwest,control_269,"(27, 3.4, 104.4)","(27, 3.4, 104.4)",OK,
+2018_South,pdf_available,LOCAL_FILE,LOCAL_FILE|DOWNLOADED,OK,
+2018_South,pages_used,"12,13,14,15,16,17",,INFO,zdroj: AUTO_DETECT
+2018_South,rows_city_vs_intro,30,30,OK,"zdroj: PDF_intro: 30 městských (vč. 4 školních), 31 příměstských a regionálních"
+2018_South,rows_all_classes_vs_intro,61,61,OK,součet městských + příměstských + regionálních linek podle úvodu
+2018_South,rows_by_class,"{'mestska': 30, 'regionalni': 17, 'prijmestska': 14}",,INFO,třída podle čísla linky (viz classify)
+2018_South,sum_passengers_vs_intro_total,363876,363876,OK,celkový počet přepravených osob uvedený v úvodu zprávy
+2018_South,celkem_passengers,363876,363876,OK,součet 61 řádků vs. řádek CELKEM; tolerance 0
+2018_South,celkem_trips,5392,5392,OK,součet 61 řádků vs. řádek CELKEM; tolerance 0
+2018_South,celkem_unsuitable,119,119,OK,součet 61 řádků vs. řádek CELKEM; tolerance 0
+2018_South,celkem_vehicle_km,64339.8,64339.7,OK,součet 61 řádků vs. řádek CELKEM; tolerance 3.25
+2018_South,celkem_statistical_km,5517492.8,5517492.9,OK,součet 61 řádků vs. řádek CELKEM; tolerance 32.5
+2018_South,celkem_passenger_km,1358580.8,1358580.7,OK,součet 61 řádků vs. řádek CELKEM; tolerance 3.25
+2018_South,header_main_date,2018-10-17,1 datum,OK,
+2018_South,header_observation_window,6:00-20:00,1 okno,OK,
+2018_South,main_date_within_intro_range,2018-10-17,2018-10-16..2018-10-18,OK,
+2018_South,route_names_from_intro,30,30,OK,názvy tras z úvodního seznamu; chybějící: 
+2018_South,route_labels_city,106 113 115 117 121 124 134 135 136 138 139 150 154 157 175 188 189 193 196 197 199 203 213 215 254 256 270 272 X113 X363,,INFO,
+2018_South,route_labels_noncity_excluded,31,,INFO,326 327 328 331 332 333 335 337 339 341 362 363 385 397 428 438 441 444 445 452 453 454 455 459 461 462 463 469 485 651 742
+2018_South,duplicate_route_labels,0,0,OK,
+2018_South,unmatched_candidate_lines,0,0,OK,viz extraction_unmatched_lines.csv
+2018_South,missing_values_numeric,0,0,OK,
+2018_South,nonpositive_vozokm_or_osobokm,0,0,OK,tyto řádky mají analysis_ready = FALSE
+2018_South,ratio_pdf_vs_computed,0,0,OK,porovnání s ohledem na zaokrouhlení; podezřelé: 
+2018_South,unsuitable_gt_trips,0,0,OK,
+2018_South,low_service_count_rows,4,,INFO,"spoje < 10; pouze příznak, řádky NEJSOU vyřazeny"
+2018_South,school_routes,254 256 270 272,,OK,PDF_intro: 4 školní linky; identita = 25x-27x (počet souhlasí) – inferováno; chybějící v datech: 
+2018_South,control_106,"(9194, 1368.4, 25420.5)","(9194, 1368.4, 25420.5)",OK,
+2018_South,control_X113,"(101, 72.0, 276.0)","(101, 72.0, 276.0)",OK,
+2019_East,pdf_available,LOCAL_FILE,LOCAL_FILE|DOWNLOADED,OK,
+2019_East,pages_used,"14,15,16",,INFO,zdroj: CONFIG
+2019_East,rows_city_vs_intro,34,34,OK,zdroj: from_previous_project_output_not_PDF_intro (úvod 2019 nebyl zkontrolován)
+2019_East,rows_all_classes_vs_intro,35,,NOT_VERIFIED,součet městských + příměstských + regionálních linek podle úvodu
+2019_East,rows_by_class,"{'mestska': 34, 'prijmestska': 1}",,INFO,třída podle čísla linky (viz classify)
+2019_East,sum_passengers_vs_intro_total,110881,,NOT_VERIFIED,celkový počet přepravených osob uvedený v úvodu zprávy
+2019_East,celkem_row_found,NO,YES,REVIEW,Řádek CELKEM nenalezen na použitých stranách – kontrola součtů neproběhla.
+2019_East,header_main_date,2019-04-10,1 datum,OK,
+2019_East,header_observation_window,6:00-20:00,1 okno,OK,
+2019_East,main_date_within_intro_range,2019-04-10,2019-04-09..2019-04-11,OK,
+2019_East,route_names_from_intro,34,34,OK,názvy tras z úvodního seznamu; chybějící: 
+2019_East,route_labels_city,101 109 111 133 141 146 148 155 163 181 182 194 207 208 210 211 212 220 221 222 223 224 226 227 228 229 240 250 252 253 259 262 264 267,,INFO,
+2019_East,route_labels_noncity_excluded,1,,INFO,303
+2019_East,duplicate_route_labels,0,0,OK,
+2019_East,unmatched_candidate_lines,0,0,OK,viz extraction_unmatched_lines.csv
+2019_East,missing_values_numeric,0,0,OK,
+2019_East,nonpositive_vozokm_or_osobokm,0,0,OK,tyto řádky mají analysis_ready = FALSE
+2019_East,ratio_pdf_vs_computed,0,0,OK,porovnání s ohledem na zaokrouhlení; podezřelé: 
+2019_East,unsuitable_gt_trips,0,0,OK,
+2019_East,low_service_count_rows,6,,INFO,"spoje < 10; pouze příznak, řádky NEJSOU vyřazeny"
+2019_East,school_routes,NA,,NOT_VERIFIED,"NOT_CHECKED (úvod 2019 nezkontrolován; 252,253,259,262,264,267 jsou pravděpodobně školní)"
+2019_East,control_101,"(3998, 815.7, 9736.2)","(3998, 815.7, 9736.2)",OK,
+2019_East,control_109,"(7425, 1767.0, 31930.6)","(7425, 1767.0, 31930.6)",OK,
+2019_East,control_207,"(13946, 1407.3, 26117.6)","(13946, 1407.3, 26117.6)",OK,
+2019_East,control_223,"(8541, 1855.3, 29879.5)","(8541, 1855.3, 29879.5)",OK,
+2019_East,control_240,"(5233, 1933.2, 33877.7)","(5233, 1933.2, 33877.7)",OK,

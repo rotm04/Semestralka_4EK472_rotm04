@@ -1,0 +1,25 @@
+Přehled základních charakteristik linek - charakteristiky (Sestava 9)
+PRŮZKUM: BUS19VY LINKY: všechny
+SLOŽKY: V_OBR_2019 ÚSEK: celá linka
+DATUM PRŮZKUMU: 10.4.2019 - 11.4.2019 VARIANTY CHR.: podle linkového seznamu
+DNY V TÝDNU: středa OBSADITELNOST: ve špičce
+ZVOLENÉ OBDOBÍ: 6:00 - 20:00 hod. NABÍDKA: den akce
+Přepravené Vozové Statistické Osobokm osobokm/ Z osobokm Nevyhovující
+Linka Počet spojů
+osoby km km Celkem vozokm %OBS-ST5 %ST 5 spoje
+676 225 282,8 14669,0 1579,2 5,6 14,5 11,5 19 1
+TAM 119 156,0 7974,8 867,8 5,6 0,0 0,0 11 0
+ZPĚT 106 126,8 6694,3 711,4 5,6 32,2 25,4 8 1
+678 192 360,6 25242,7 1889,7 5,2 0,0 0,0 18 0
+TAM 115 183,7 12856,2 1038,7 5,7 0,0 0,0 10 0
+ZPĚT 77 177,0 12386,5 850,9 4,8 0,0 0,0 8 0
+679 332 402,4 28167,3 3073,4 7,6 0,0 0,0 18 0
+TAM 164 214,1 14989,8 1662,2 7,8 0,0 0,0 8 0
+ZPĚT 168 188,2 13177,5 1411,3 7,5 0,0 0,0 10 0
+X480 162 119,6 8373,0 1345,9 11,3 0,0 0,0 14 0
+TAM 96 63,9 4474,0 774,5 12,1 0,0 0,0 5 0
+ZPĚT 66 55,7 3899,0 571,4 10,3 0,0 0,0 9 0
+CELKEM 150157 54812,6 3883916,9 765522,3 14,0 0,8 0,1 4617 46
+Poznámka: Nevyhovující spoje - spoje, u nichž na libovolném úseku převyšuje poptávka nabídku.
+%OBS-ST5 a %ST 5 - podíl osobokm na úsecích, kde převyšuje poptávka zvolenou nabídku,
+resp. kde je maximální obsazení.

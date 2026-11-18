@@ -1,0 +1,37 @@
+Přehled základních charakteristik linek - charakteristiky (Sestava 9)
+PRŮZKUM: BUS18JZ LINKY: všechny
+SLOŽKY: V_OBR_2018 ÚSEK: celá linka
+DATUM PRŮZKUMU: 18.4.2018 VARIANTY CHR.: podle linkového seznamu
+DNY V TÝDNU: středa OBSADITELNOST: ve špičce
+ZVOLENÉ OBDOBÍ: 6:00 - 20:00 hod. NABÍDKA: den akce
+Přepravené Vozové Statistické Osobokm osobokm/ Z osobokm Nevyhovující
+Linka Počet spojů
+osoby km km Celkem vozokm %OBS-ST5 %ST 5 spoje
+448 517 245,7 12386,1 2390,5 9,7 10,7 0,0 26 1
+TAM 293 124,2 6267,2 1283,7 10,3 0,0 0,0 12 0
+ZPĚT 224 121,5 6118,9 1106,8 9,1 23,0 0,0 14 1
+449 279 215,3 15068,3 1467,7 6,8 0,0 0,0 24 0
+TAM 146 99,4 6959,5 763,4 7,7 0,0 0,0 9 0
+ZPĚT 133 115,8 8108,8 704,3 6,1 0,0 0,0 15 0
+451 169 103,7 7261,8 1201,2 11,6 0,0 0,0 14 0
+TAM 55 31,7 2221,8 464,4 14,6 0,0 0,0 2 0
+ZPĚT 114 72,0 5040,0 736,8 10,2 0,0 0,0 12 0
+460 59 115,8 8107,4 422,6 3,6 0,0 0,0 13 0
+TAM 49 85,5 5983,6 380,0 4,4 0,0 0,0 8 0
+ZPĚT 10 30,3 2123,8 42,6 1,4 0,0 0,0 5 0
+486 59 91,9 6435,8 502,7 5,5 0,0 0,0 5 0
+TAM 21 43,6 3052,7 166,6 3,8 0,0 0,0 2 0
+ZPĚT 38 48,3 3383,1 336,1 7,0 0,0 0,0 3 0
+488 874 393,4 27540,8 4823,4 12,3 6,3 0,0 35 2
+TAM 422 198,8 13916,0 2486,2 12,5 6,4 0,0 18 1
+ZPĚT 452 194,6 13624,8 2337,2 12,0 6,2 0,0 17 1
+664 226 110,2 4711,7 893,5 8,1 12,9 4,0 21 1
+TAM 109 57,1 2439,3 419,3 7,3 0,0 0,0 11 0
+ZPĚT 117 53,1 2272,4 474,2 8,9 24,2 7,6 10 1
+665 667 190,6 12106,3 2046,5 10,7 0,0 0,0 30 0
+TAM 496 116,9 7391,8 1453,0 12,4 0,0 0,0 18 0
+ZPĚT 171 73,7 4714,4 593,5 8,1 0,0 0,0 12 0
+CELKEM 143971 43675,4 3536320,3 972262,9 22,3 3,8 0,1 3012 67
+Poznámka: Nevyhovující spoje - spoje, u nichž na libovolném úseku převyšuje poptávka nabídku.
+%OBS-ST5 a %ST 5 - podíl osobokm na úsecích, kde převyšuje poptávka zvolenou nabídku,
+resp. kde je maximální obsazení.

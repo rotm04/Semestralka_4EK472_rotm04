@@ -1,0 +1,22 @@
+Přehled základních charakteristik linek - charakteristiky (Sestava 9)
+PRŮZKUM: BUS18JIH LINKY: všechny
+SLOŽKY: V_OBR_2018 ÚSEK: celá linka
+DATUM PRŮZKUMU: 17.10.2018 VARIANTY CHR.: podle linkového seznamu
+DNY V TÝDNU: středa OBSADITELNOST: ve špičce
+ZVOLENÉ OBDOBÍ: 6:00 - 20:00 hod. NABÍDKA: den akce
+Přepravené Vozové Statistické Osobokm osobokm/ Z osobokm Nevyhovující
+Linka Počet spojů
+osoby km km Celkem vozokm %OBS-ST5 %ST 5 spoje
+651 288 183,1 12819,2 1266,8 6,9 0,0 0,0 26 0
+TAM 116 97,0 6791,8 533,5 5,5 0,0 0,0 14 0
+ZPĚT 172 86,1 6027,4 733,3 8,5 0,0 0,0 12 0
+742 81 134,5 4035,8 329,8 2,5 0,0 0,0 32 0
+TAM 38 70,7 2122,1 160,4 2,3 0,0 0,0 16 0
+ZPĚT 43 63,8 1913,8 169,4 2,7 0,0 0,0 16 0
+X363 1485 232,0 16236,5 3737,2 16,1 0,0 0,0 60 0
+TAM 612 112,0 7836,5 1662,9 14,9 0,0 0,0 30 0
+ZPĚT 873 120,0 8400,0 2074,4 17,3 0,0 0,0 30 0
+CELKEM 363876 64339,7 5517492,9 1358580,7 21,1 2,1 0,2 5392 119
+Poznámka: Nevyhovující spoje - spoje, u nichž na libovolném úseku převyšuje poptávka nabídku.
+%OBS-ST5 a %ST 5 - podíl osobokm na úsecích, kde převyšuje poptávka zvolenou nabídku,
+resp. kde je maximální obsazení.

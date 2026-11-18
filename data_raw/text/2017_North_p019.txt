@@ -1,0 +1,16 @@
+Přehled základních charakteristik linek - charakteristiky (Sestava 9)
+PRŮZKUM: BUS17SE LINKY: všechny
+SLOŽKY: V_OBR_2017 ÚSEK: celá linka
+DATUM PRŮZKUMU: 5.4.2017 VARIANTY CHR.: podle linkového seznamu
+DNY V TÝDNU: středa OBSADITELNOST: ve špičce
+ZVOLENÉ OBDOBÍ: 6:00 - 20:00 hod. NABÍDKA: den akce
+Přepravené Vozové Statistické Osobokm osobokm/ Z osobokm Nevyhovující
+Linka Počet spojů
+osoby km km Celkem vozokm %OBS-ST5 %ST 5 spoje
+575 181 6,6 551,5 383,6 57,7 75,1 0,0 3 1
+TAM 2 2,4 164,5 4,7 2,0 0,0 0,0 1 0
+ZPĚT 179 4,3 387,0 379,0 88,1 75,9 0,0 2 1
+CELKEM 315415 70160,4 5840001,7 1448085,8 20,6 3,2 0,1 5417 131
+Poznámka: Nevyhovující spoje - spoje, u nichž na libovolném úseku převyšuje poptávka nabídku.
+%OBS-ST5 a %ST 5 - podíl osobokm na úsecích, kde převyšuje poptávka zvolenou nabídku,
+resp. kde je maximální obsazení.
